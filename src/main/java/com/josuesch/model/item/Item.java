@@ -34,4 +34,9 @@ public abstract class Item {
     public int hashCode() {
         return Objects.hashCode(nome);
     }
+
+    @Override
+    public String toString() {
+        return String.format("R$ %.2f - %s", preco, nome);
+    }
 }

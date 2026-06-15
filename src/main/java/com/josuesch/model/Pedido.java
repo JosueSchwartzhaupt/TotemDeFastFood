@@ -3,6 +3,7 @@ package com.josuesch.model;
 import com.josuesch.model.item.Item;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Pedido implements Comparable<Pedido>{
 
@@ -36,6 +37,12 @@ public class Pedido implements Comparable<Pedido>{
         return itens.getOrDefault(item, 0);
     }
 
+    public int getQuantidadeDeItens() {
+        return itens.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
     public double getTotal() {
         return itens.entrySet().stream()
                 .mapToDouble(entry -> entry.getKey().getPreco() * entry.getValue())
@@ -59,5 +66,17 @@ public class Pedido implements Comparable<Pedido>{
     }
     public boolean isEmpty() {
         return itens.isEmpty();
+    }
+
+    public String getResumo(){
+        return numero + " - " + getQuantidadeDeItens() + (getQuantidadeDeItens() > 1? " Itens" : " Item") + " STATUS: " + status;
+    }
+
+    public String getDetalhes(){
+        return "Pedido n° " + numero + "    Status: " + status + "\n" +
+               "Itens: \n" +
+               itens.entrySet().stream()
+                .map(item -> String.format("%3d x %s", item.getValue(), item.getKey().toString()))
+                .collect(Collectors.joining("\n"));
     }
 }

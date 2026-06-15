@@ -128,18 +128,18 @@
                               <Font size="23.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="txNumeroPedido" />
-                        <Button fx:id="btPedidoAnterior" mnemonicParsing="false" text="Anterior" />
-                        <Button fx:id="btProximoPedido" mnemonicParsing="false" text="Proximo" />
+                        <TextField fx:id="txNumeroPedido" onAction="#onActionTxNumeroPedido" />
+                        <Button fx:id="btPedidoAnterior" mnemonicParsing="false" onAction="#onActionBtPedidoAnterior" text="Anterior" />
+                        <Button fx:id="btProximoPedido" mnemonicParsing="false" onAction="#onActionBtProximoPedido" text="Proximo" />
                      </children>
                   </HBox>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dados:" />
                   <TextArea fx:id="txDadosPedidoSelecionado" editable="false" prefHeight="100.0" prefWidth="200.0" />
                   <HBox alignment="CENTER">
                      <children>
-                        <Button fx:id="BtIniciarPreparo" mnemonicParsing="false" text="Iniciar Preparo" />
-                        <Button fx:id="btConcluir" mnemonicParsing="false" text="Concluir" />
-                        <Button fx:id="btCancelar" mnemonicParsing="false" text="Cancelar" />
+                        <Button fx:id="btIniciarPreparo" mnemonicParsing="false" onAction="#OnActionBtIniciarPreparo" text="Iniciar Preparo" />
+                        <Button fx:id="btConcluir" mnemonicParsing="false" onAction="#OnActionBtConcluir" text="Concluir" />
+                        <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#OnActionBtCancelar" text="Cancelar" />
                      </children>
                   </HBox>
                </children></VBox>

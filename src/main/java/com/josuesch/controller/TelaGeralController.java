@@ -7,10 +7,7 @@ import com.josuesch.model.Pedido;
 import com.josuesch.model.Sistema;
 import com.josuesch.model.item.Item;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import static com.josuesch.model.Cardapio.X_BURGER;
 import static com.josuesch.model.Cardapio.X_SALADA;
@@ -31,6 +28,8 @@ public class TelaGeralController {
     @FXML
     private TextArea txDadosPedidoSelecionado;
 
+    private int pedidoAtual;
+
     private Pedido pedidoCliente;
     private Sistema sistema;
 
@@ -40,6 +39,9 @@ public class TelaGeralController {
     }
     @FXML
     public void initialize() {
+        txNumeroPedido.setTextFormatter(new TextFormatter<>(change ->
+                change.getControlNewText().matches("\\d*") ? change : null
+        ));
         updateUi();
     }
 
@@ -113,10 +115,60 @@ public class TelaGeralController {
                 });
     }
 
+    @FXML
+    private void onActionBtPedidoAnterior() throws IOException {
+        sistema.getPedidoAnterior(pedidoAtual)
+                .ifPresent(anterior -> pedidoAtual = anterior);
+        updateUi();
+    }
+
+    @FXML
+    private void onActionBtProximoPedido() throws IOException {
+        sistema.getProximoPedido(pedidoAtual)
+                .ifPresent(proximo -> pedidoAtual = proximo);
+        updateUi();
+    }
+
+    @FXML
+    private void onActionTxNumeroPedido() throws IOException {
+        String input = txNumeroPedido.getText();
+
+        try {
+            pedidoAtual = Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            pedidoAtual = 0;
+        }
+
+        updateUi();
+    }
+    @FXML
+    private void OnActionBtIniciarPreparo() throws IOException {
+        sistema.iniciaPedido(pedidoAtual);
+        updateUi();
+    }
+
+    @FXML
+    private void OnActionBtConcluir() throws IOException {
+        sistema.finalizaPedido(pedidoAtual);
+        updateUi();
+    }
+
+    @FXML
+    private void OnActionBtCancelar() throws IOException {
+        pedidoAtual = 0;
+        updateUi();
+    }
+
     private void updateUi(){
         txQtdLanche1.setText(Integer.toString(pedidoCliente.getQuantidadeItem(X_BURGER)));
         txQtdLanche2.setText(Integer.toString(pedidoCliente.getQuantidadeItem(X_SALADA)));
+        txListaDePedidos.setText(sistema.listarPedidos());
 
         txTotalPedido.setText(String.format("%.2f",pedidoCliente.getTotal()));
+
+        txNumeroPedido.setText(pedidoAtual > 0? Integer.toString(pedidoAtual): "");
+        var pedido = sistema.getPedido(pedidoAtual);
+        txDadosPedidoSelecionado.setText(pedido.map(Pedido::getDetalhes)
+                .orElse(pedidoAtual == 0? "" : "Pedido não encontrado"));
     }
 }

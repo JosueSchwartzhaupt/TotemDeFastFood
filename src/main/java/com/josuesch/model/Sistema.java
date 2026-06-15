@@ -3,6 +3,7 @@ package com.josuesch.model;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Sistema {
     private final Map<Integer, Pedido> pedidos = new HashMap<>();
@@ -41,15 +42,23 @@ public class Sistema {
         proximoNumero = 1;
     }
 
+    public String listarPedidos(){
+        return pedidos.values().stream()
+                .sorted()
+                .map(Pedido::getResumo)
+                .collect(Collectors.joining("\n"));
+    }
 
+    public Optional<Integer> getProximoPedido(int atual) {
+        return pedidos.keySet().stream()
+                .filter(id -> id > atual)
+                .min(Integer::compareTo);
+    }
 
-//    public boolean removePedido(Integer numeroDoPedido){
-//        if (pedidos.containsKey(numeroDoPedido)) {
-//            pedidos.remove(numeroDoPedido);
-//            return true;
-//        }
-//        return false;
-//    }
-
+    public Optional<Integer>  getPedidoAnterior(int atual) {
+        return pedidos.keySet().stream()
+                .filter(id -> id < atual)
+                .max(Integer::compareTo);
+    }
 
 }
