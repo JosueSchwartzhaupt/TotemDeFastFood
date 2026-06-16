@@ -25,4 +25,9 @@ public class Bebida extends Item {
     public int hashCode() {
         return Objects.hash(super.hashCode(), tamanho);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + tamanho;
+    }
 }

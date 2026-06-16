@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
@@ -15,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox>
          <children>
@@ -73,7 +80,51 @@
                       </Tab>
                       <Tab closable="false" text="Bebidas">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <VBox alignment="TOP_CENTER">
+                                                   <children>
+                                                      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@Refrigerante.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ComboBox fx:id="cbTamanhoBebida1" onAction="#OnActionCbTamanhoBebida1" prefWidth="100.0" />
+                                                      <HBox alignment="TOP_CENTER">
+                                                         <children>
+                                                            <Button fx:id="btSubBebida1" mnemonicParsing="false" onAction="#onActionBtSubBebida1" text="-" />
+                                                            <TextField fx:id="txQtdBebida1" alignment="CENTER" editable="false" prefWidth="40.0" />
+                                                            <Button fx:id="btAddBebida1" mnemonicParsing="false" onAction="#onActionBtAddBebida1" text="+" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER">
+                                                   <children>
+                                                      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@Refrigerante.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ComboBox fx:id="cbTamanhoBebida2" onAction="#OnActionCbTamanhoBebida2" prefWidth="100.0" />
+                                                      <HBox alignment="TOP_CENTER">
+                                                         <children>
+                                                            <Button fx:id="btSubBebida2" mnemonicParsing="false" onAction="#onActionBtSubBebida2" text="-" />
+                                                            <TextField fx:id="txQtdBebida2" alignment="CENTER" editable="false" prefWidth="40.0" />
+                                                            <Button fx:id="btAddBebida2" mnemonicParsing="false" onAction="#onActionBtAddBebida2" text="+" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children></AnchorPane>
                         </content>
                       </Tab>
                         <Tab closable="false" text="Sobremesas">

@@ -29,8 +29,20 @@ public class Pedido implements Comparable<Pedido>{
         itens.merge(item, 1 , Integer::sum);
     }
 
+    public void addItem(Item item, int quantidade) {
+    if (quantidade <= 0) {
+        itens.remove(item);
+    } else {
+        itens.put(item, quantidade);
+    }
+    }
+
     public void removeItem(Item item) {
         itens.computeIfPresent(item, (i, qtd) -> qtd > 1 ? qtd - 1 : null);
+    }
+
+    public void zerarItem(Item item) {
+        itens.remove(item);
     }
 
     public int getQuantidadeItem(Item item) {
