@@ -7,16 +7,14 @@ import java.util.Objects;
 import com.josuesch.model.Cardapio;
 import com.josuesch.model.Pedido;
 import com.josuesch.model.Sistema;
+import com.josuesch.model.enums.Sabor;
 import com.josuesch.model.enums.Tamanho;
 import com.josuesch.model.item.Bebida;
 import com.josuesch.model.item.Item;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import static com.josuesch.model.Cardapio.REFRIGERANTES;
-import static com.josuesch.model.Cardapio.SUCOS;
-import static com.josuesch.model.Cardapio.X_BURGER;
-import static com.josuesch.model.Cardapio.X_SALADA;
+import static com.josuesch.model.Cardapio.*;
 
 public class TelaGeralController {
     @FXML
@@ -28,9 +26,17 @@ public class TelaGeralController {
     @FXML
     private TextField txQtdBebida2;
     @FXML
+    private TextField txQtdSobremesa1;
+    @FXML
+    private TextField txQtdSobremesa2;
+    @FXML
     private ComboBox<Tamanho> cbTamanhoBebida1;
     @FXML
-    private ComboBox<Tamanho> cbTamanhoBebida2;    
+    private ComboBox<Tamanho> cbTamanhoBebida2;
+    @FXML
+    private ComboBox<Sabor> cbSaborSobremesa1;
+    @FXML
+    private ComboBox<Sabor> cbSaborSobremesa2;
     @FXML
     private TextField txTotalPedido;
 
@@ -42,13 +48,16 @@ public class TelaGeralController {
     @FXML
     private TextArea txDadosPedidoSelecionado;
 
-    private int pedidoAtual;
+    private final Sistema sistema;
 
+    private int pedidoAtual;
     private Pedido pedidoCliente;
-    private Sistema sistema;
 
     private Tamanho tamanhoRefriAnterior = Tamanho.GRANDE;
     private Tamanho tamanhoSucoAnterior = Tamanho.GRANDE;
+
+    private Sabor saborCasquinhaAnterior = Sabor.MISTO;
+    private Sabor saborSundaeAnterior = Sabor.MISTO;
 
     public TelaGeralController(Sistema sistema) {
         this.sistema = sistema;
@@ -65,6 +74,12 @@ public class TelaGeralController {
 
         cbTamanhoBebida1.setValue(tamanhoRefriAnterior);
         cbTamanhoBebida2.setValue(tamanhoSucoAnterior);
+
+        cbSaborSobremesa1.getItems().addAll(Sabor.values());
+        cbSaborSobremesa2.getItems().addAll(Sabor.values());
+
+        cbSaborSobremesa1.setValue(saborCasquinhaAnterior);
+        cbSaborSobremesa2.setValue(saborSundaeAnterior);
 
         updateUi();
     }
@@ -132,6 +147,48 @@ public class TelaGeralController {
         tamanhoSucoAnterior = atual;
         updateUi();
 }
+
+    @FXML
+    private void onActionBtAddSobremesa1() throws IOException {
+        pedidoCliente.addItem(CASQUINHAS.get(cbSaborSobremesa1.getValue()));
+        updateUi();
+    }
+    @FXML
+    private void onActionBtSubSobremesa1() throws IOException {
+        pedidoCliente.removeItem(CASQUINHAS.get(cbSaborSobremesa1.getValue()));
+        updateUi();
+    }
+
+    @FXML
+    private void onActionBtAddSobremesa2() throws IOException {
+        pedidoCliente.addItem(SUNDAES.get(cbSaborSobremesa2.getValue()));
+        updateUi();
+    }
+    @FXML
+    private void onActionBtSubSobremesa2() throws IOException {
+        pedidoCliente.removeItem(SUNDAES.get(cbSaborSobremesa2.getValue()));
+        updateUi();
+    }
+
+    @FXML
+    private void OnActionCbSaborSobremesa1() {
+        Sabor atual = cbSaborSobremesa1.getValue();
+
+        trocarOpcao(CASQUINHAS, saborCasquinhaAnterior, atual);
+
+        saborCasquinhaAnterior = atual;
+        updateUi();
+    }
+
+    @FXML
+    private void OnActionCbSaborSobremesa2() {
+        Sabor atual = cbSaborSobremesa2.getValue();
+
+        trocarOpcao(SUNDAES, saborSundaeAnterior, atual);
+
+        saborSundaeAnterior = atual;
+        updateUi();
+    }
 
     private <K, V extends Item> void trocarOpcao(Map<K, V> itens, K anterior, K atual) {
         if (Objects.equals(atual, anterior)) return;
@@ -239,11 +296,41 @@ public class TelaGeralController {
         updateUi();
     }
 
+    @FXML
+    private void OnActionBtIniciarNovoDia() throws IOException {
+        if(sistema.isPedidosFinalizados()){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Iniciar Novo Dia");
+            alert.setHeaderText("Tem certeza?");
+            alert.setContentText(
+                    "O registros de pedidos será perdido."
+            );
+
+            alert.showAndWait()
+                    .filter(ButtonType.OK::equals)
+                    .ifPresent(btn -> {
+                        sistema.iniciarNovoDia();
+                        updateUi();
+                    });
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Dia não finalizado");
+            alert.setHeaderText("Ainda há pedidos não finalizados no dia de hoje!");
+            alert.setContentText(
+                    "Por favor entregar todos antes de finalizar o dia."
+            );
+
+            alert.showAndWait();
+        }
+    }
+
     private void updateUi(){
         txQtdLanche1.setText(Integer.toString(pedidoCliente.getQuantidadeItem(X_BURGER)));
         txQtdLanche2.setText(Integer.toString(pedidoCliente.getQuantidadeItem(X_SALADA)));
         txQtdBebida1.setText(Integer.toString(pedidoCliente.getQuantidadeItem(REFRIGERANTES.get(cbTamanhoBebida1.getValue()))));
         txQtdBebida2.setText(Integer.toString(pedidoCliente.getQuantidadeItem(SUCOS.get(cbTamanhoBebida2.getValue()))));
+        txQtdSobremesa1.setText(Integer.toString(pedidoCliente.getQuantidadeItem(CASQUINHAS.get(cbSaborSobremesa1.getValue()))));
+        txQtdSobremesa2.setText(Integer.toString(pedidoCliente.getQuantidadeItem(SUNDAES.get(cbSaborSobremesa2.getValue()))));
         txListaDePedidos.setText(sistema.listarPedidos());
 
         txTotalPedido.setText(String.format("%.2f",pedidoCliente.getTotal()));

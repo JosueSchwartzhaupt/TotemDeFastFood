@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
@@ -22,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox>
          <children>
@@ -42,7 +36,7 @@
                                                    <children>
                                                       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@burger-duplo.png" />
+                                                            <Image url="@Cheese-Burger.png" />
                                                          </image>
                                                       </ImageView>
                                                       <HBox alignment="TOP_CENTER">
@@ -107,7 +101,7 @@
                                                    <children>
                                                       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@Refrigerante.png" />
+                                                            <Image url="@Suco.png" />
                                                          </image>
                                                       </ImageView>
                                                       <ComboBox fx:id="cbTamanhoBebida2" onAction="#OnActionCbTamanhoBebida2" prefWidth="100.0" />
@@ -129,7 +123,51 @@
                       </Tab>
                         <Tab closable="false" text="Sobremesas">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <VBox alignment="TOP_CENTER">
+                                                   <children>
+                                                      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@Casquinha.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ComboBox fx:id="cbSaborSobremesa1" onAction="#OnActionCbSaborSobremesa1" prefWidth="100.0" />
+                                                      <HBox alignment="TOP_CENTER">
+                                                         <children>
+                                                            <Button fx:id="btSubSobremesa1" mnemonicParsing="false" onAction="#onActionBtSubSobremesa1" text="-" />
+                                                            <TextField fx:id="txQtdSobremesa1" alignment="CENTER" editable="false" prefWidth="40.0" />
+                                                            <Button fx:id="btAddSobremesa1" mnemonicParsing="false" onAction="#onActionBtAddSobremesa1" text="+" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER">
+                                                   <children>
+                                                      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@Sundae.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ComboBox fx:id="cbSaborSobremesa2" onAction="#OnActionCbSaborSobremesa2" prefWidth="100.0" />
+                                                      <HBox alignment="TOP_CENTER">
+                                                         <children>
+                                                            <Button fx:id="btSubSobremesa2" mnemonicParsing="false" onAction="#onActionBtSubSobremesa2" text="-" />
+                                                            <TextField fx:id="txQtdSobremesa2" alignment="CENTER" editable="false" prefWidth="40.0" />
+                                                            <Button fx:id="btAddSobremesa2" mnemonicParsing="false" onAction="#onActionBtAddSobremesa2" text="+" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children></AnchorPane>
                           </content>
                         </Tab>
                     </tabs>
@@ -191,6 +229,11 @@
                         <Button fx:id="btIniciarPreparo" mnemonicParsing="false" onAction="#OnActionBtIniciarPreparo" text="Iniciar Preparo" />
                         <Button fx:id="btConcluir" mnemonicParsing="false" onAction="#OnActionBtConcluir" text="Concluir" />
                         <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#OnActionBtCancelar" text="Cancelar" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT">
+                     <children>
+                        <Button fx:id="btIniciarNovoDia" mnemonicParsing="false" onAction="#OnActionBtIniciarNovoDia" text="Iniciar Novo Dia" />
                      </children>
                   </HBox>
                </children></VBox>

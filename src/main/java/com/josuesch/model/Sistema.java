@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.josuesch.model.Pedido.PRONTO;
+
 public class Sistema {
     private final Map<Integer, Pedido> pedidos = new HashMap<>();
     private int proximoNumero = 1;
@@ -25,7 +27,7 @@ public class Sistema {
     }
 
     public boolean finalizaPedido(int numero){
-        return alteraStatus(numero, Pedido.PRONTO);
+        return alteraStatus(numero, PRONTO);
     }
 
     private boolean alteraStatus(int numero, String status){
@@ -40,6 +42,12 @@ public class Sistema {
     public void iniciarNovoDia(){
         pedidos.clear();
         proximoNumero = 1;
+    }
+
+    public boolean isPedidosFinalizados(){
+        return pedidos.values().stream()
+                .map(Pedido::getStatus)
+                .allMatch(status -> status.equals(PRONTO));
     }
 
     public String listarPedidos(){
