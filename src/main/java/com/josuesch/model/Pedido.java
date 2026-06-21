@@ -80,15 +80,39 @@ public class Pedido implements Comparable<Pedido>{
         return itens.isEmpty();
     }
 
-    public String getResumo(){
-        return numero + " - " + getQuantidadeDeItens() + (getQuantidadeDeItens() > 1? " Itens" : " Item") + " STATUS: " + status;
+    public String getResumo() {
+        return String.format(
+                "Pedido #%03d | %2d %-5s | R$ %6.2f | %s",
+                numero,
+                getQuantidadeDeItens(),
+                getQuantidadeDeItens() == 1 ? "item" : "itens",
+                getTotal(),
+                status
+        );
     }
 
-    public String getDetalhes(){
-        return "Pedido n° " + numero + "    Status: " + status + "\n" +
-               "Itens: \n" +
-               itens.entrySet().stream()
-                .map(item -> String.format("%3d x %s", item.getValue(), item.getKey().toString()))
-                .collect(Collectors.joining("\n"));
+    public String getDetalhes() {
+        return """
+            ========================================
+            PEDIDO #%03d
+            ========================================
+            Status: %s
+            Quantidade de itens: %d
+            Valor total: R$ %.2f
+
+            ITENS:
+            %s
+            """.formatted(
+                numero,
+                status,
+                getQuantidadeDeItens(),
+                getTotal(),
+                itens.entrySet().stream()
+                        .map(item -> String.format(
+                                "%3d x %s",
+                                item.getValue(),
+                                item.getKey()))
+                        .collect(Collectors.joining("\n"))
+        );
     }
 }

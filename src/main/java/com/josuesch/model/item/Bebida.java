@@ -28,6 +28,8 @@ public class Bebida extends Item {
 
     @Override
     public String toString() {
-        return super.toString() + " " + tamanho;
+        return String.format("%s | Tamanho: %s",
+                super.toString(),
+                tamanho);
     }
 }

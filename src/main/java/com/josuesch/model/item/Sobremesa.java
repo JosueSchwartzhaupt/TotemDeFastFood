@@ -25,4 +25,12 @@ public class Sobremesa extends Item {
     public int hashCode() {
         return Objects.hash(super.hashCode(), sabor);
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s | Sabor: %s",
+                super.toString(),
+                sabor);
+    }
+
 }

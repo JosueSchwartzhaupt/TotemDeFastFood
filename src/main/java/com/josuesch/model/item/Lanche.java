@@ -8,5 +8,12 @@ public class Lanche extends Item {
         super(nome, preco);
         this.descricao = descricao;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s | %s",
+                super.toString(),
+                descricao);
+    }
     
 }
