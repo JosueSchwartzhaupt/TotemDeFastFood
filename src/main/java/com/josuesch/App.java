@@ -33,6 +33,7 @@ public class App extends Application {
         FXMLLoader loader =
                 new FXMLLoader(App.class.getResource(fxml + ".fxml"));
 
+        // Carrega o sistema na controller
         loader.setController(
                 new TelaGeralController(sistema)
         );

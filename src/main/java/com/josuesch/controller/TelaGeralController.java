@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
 
-import com.josuesch.model.Cardapio;
 import com.josuesch.model.Pedido;
 import com.josuesch.model.Sistema;
 import com.josuesch.model.enums.Sabor;
 import com.josuesch.model.enums.Tamanho;
-import com.josuesch.model.item.Bebida;
 import com.josuesch.model.item.Item;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -63,12 +61,16 @@ public class TelaGeralController {
         this.sistema = sistema;
         pedidoCliente = new Pedido();
     }
+
+    // Inicialização de alguns componentes da tela
     @FXML
     public void initialize() {
+        // Permitir apenas a digitação de números na caixa de texto
         txNumeroPedido.setTextFormatter(new TextFormatter<>(change ->
                 change.getControlNewText().matches("\\d*") ? change : null
         ));
 
+        // Inicialização dinâmica das comboboxs
         cbTamanhoBebida1.getItems().addAll(Tamanho.values());
         cbTamanhoBebida2.getItems().addAll(Tamanho.values());
 
@@ -84,6 +86,7 @@ public class TelaGeralController {
         updateUi();
     }
 
+    // Tratamento de adição e subtração dos Lanches
     @FXML
     private void onActionBtAddLanche1() throws IOException {
         pedidoCliente.addItem(X_BURGER);
@@ -106,6 +109,7 @@ public class TelaGeralController {
         updateUi();
     }
 
+    // Tratamento de adição e subtração das Bebidas
     @FXML
     private void onActionBtAddBebida1() throws IOException {
         pedidoCliente.addItem(REFRIGERANTES.get(cbTamanhoBebida1.getValue()));
@@ -148,11 +152,13 @@ public class TelaGeralController {
         updateUi();
 }
 
+    // Tratamento de adição e subtração das Sobremesas
     @FXML
     private void onActionBtAddSobremesa1() throws IOException {
         pedidoCliente.addItem(CASQUINHAS.get(cbSaborSobremesa1.getValue()));
         updateUi();
     }
+
     @FXML
     private void onActionBtSubSobremesa1() throws IOException {
         pedidoCliente.removeItem(CASQUINHAS.get(cbSaborSobremesa1.getValue()));
@@ -190,6 +196,7 @@ public class TelaGeralController {
         updateUi();
     }
 
+    // Metódo Auxiliar para trocar o tamanho dos itens no pedidoAtual
     private <K, V extends Item> void trocarOpcao(Map<K, V> itens, K anterior, K atual) {
         if (Objects.equals(atual, anterior)) return;
 
@@ -204,6 +211,7 @@ public class TelaGeralController {
         pedidoCliente.zerarItem(itemAnterior);
     }
 
+    // Tratamento da finalização do pedido
     @FXML
     private void onActionBtConfirmarPedido() throws IOException {
         if (pedidoCliente.isEmpty()) {
@@ -324,6 +332,7 @@ public class TelaGeralController {
         }
     }
 
+    // Atualiza os campos visualizados pelo usuário
     private void updateUi(){
         txQtdLanche1.setText(Integer.toString(pedidoCliente.getQuantidadeItem(X_BURGER)));
         txQtdLanche2.setText(Integer.toString(pedidoCliente.getQuantidadeItem(X_SALADA)));

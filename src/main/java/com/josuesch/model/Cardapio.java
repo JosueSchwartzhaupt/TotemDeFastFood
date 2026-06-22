@@ -8,6 +8,7 @@ import com.josuesch.model.item.Sobremesa;
 
 import java.util.Map;
 
+// Coleção de todos os Itens do restaurante em questão
 public class Cardapio {
     public static final Lanche X_BURGER =
             new Lanche(

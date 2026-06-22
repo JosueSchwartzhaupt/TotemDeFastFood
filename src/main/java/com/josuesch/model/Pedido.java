@@ -25,6 +25,7 @@ public class Pedido implements Comparable<Pedido>{
         return Integer.compare(this.numero, outroPedido.numero);
     }
 
+    // Métodos sobrecarregados para adicionar Itens no pedido
     public void addItem(Item item) {
         itens.merge(item, 1 , Integer::sum);
     }
@@ -80,6 +81,7 @@ public class Pedido implements Comparable<Pedido>{
         return itens.isEmpty();
     }
 
+    // Métodos para gerar textos sobre o pedido
     public String getResumo() {
         return String.format(
                 "Pedido #%03d | %2d %-5s | R$ %6.2f | %s",

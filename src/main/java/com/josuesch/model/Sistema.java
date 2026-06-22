@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import static com.josuesch.model.Pedido.PRONTO;
 
 public class Sistema {
+    //Armazena os pedidos organizados pelo seu id
     private final Map<Integer, Pedido> pedidos = new HashMap<>();
     private int proximoNumero = 1;
 
@@ -22,6 +23,7 @@ public class Sistema {
         return pedido.getNumero();
     }
 
+    // Metódos para alterar o status de um pedido
     public boolean iniciaPedido(int numero){
         return alteraStatus(numero, Pedido.PREPARANDO);
     }
@@ -44,6 +46,7 @@ public class Sistema {
         proximoNumero = 1;
     }
 
+    // Verifica se todos os pedidos estão finalizados
     public boolean isPedidosFinalizados(){
         return pedidos.values().stream()
                 .map(Pedido::getStatus)
@@ -57,6 +60,7 @@ public class Sistema {
                 .collect(Collectors.joining("\n"));
     }
 
+    // Métodos para navegar entre os pedidos
     public Optional<Integer> getProximoPedido(int atual) {
         return pedidos.keySet().stream()
                 .filter(id -> id > atual)
