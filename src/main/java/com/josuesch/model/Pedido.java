@@ -109,12 +109,15 @@ public class Pedido implements Comparable<Pedido>{
                 status,
                 getQuantidadeDeItens(),
                 getTotal(),
-                itens.entrySet().stream()
-                        .map(item -> String.format(
-                                "%3d x %s",
-                                item.getValue(),
-                                item.getKey()))
-                        .collect(Collectors.joining("\n"))
+                getDetalhesItens()
         );
+    }
+    public String getDetalhesItens() {
+        return itens.entrySet().stream()
+                .map(item -> String.format(
+                        "%3d x %s",
+                        item.getValue(),
+                        item.getKey()))
+                .collect(Collectors.joining("\n"));
     }
 }

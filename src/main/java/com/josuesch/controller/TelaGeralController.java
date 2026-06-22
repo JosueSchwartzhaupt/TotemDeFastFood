@@ -45,6 +45,8 @@ public class TelaGeralController {
     private TextArea txListaDePedidos;
     @FXML
     private TextArea txDadosPedidoSelecionado;
+    @FXML
+    private TextArea txResumoDoPedido;
 
     private final Sistema sistema;
 
@@ -342,6 +344,7 @@ public class TelaGeralController {
         txQtdSobremesa2.setText(Integer.toString(pedidoCliente.getQuantidadeItem(SUNDAES.get(cbSaborSobremesa2.getValue()))));
         txListaDePedidos.setText(sistema.listarPedidos());
 
+        txResumoDoPedido.setText(pedidoCliente.getDetalhesItens());
         txTotalPedido.setText(String.format("%.2f",pedidoCliente.getTotal()));
 
         txNumeroPedido.setText(pedidoAtual > 0? Integer.toString(pedidoAtual): "");
