@@ -72,6 +72,11 @@ mvn clean install
 ```
 mvn javafx:run
 ```
+
+### Bonus
+
+Também é possível utilizar ferramentas como intellij ou VsCode e executar a classe App, permitindo também o debug do projeto.
+
 ---
 
 ## Casos de Teste
