@@ -28,7 +28,7 @@ O sistema simula um totem de autoatendimento utilizado em lanchonetes e restaura
 
 ## Tecnologias Utilizadas
 
-- Java 21
+- Java 25
 - JavaFX
 - Maven
 
@@ -38,7 +38,7 @@ O sistema simula um totem de autoatendimento utilizado em lanchonetes e restaura
 
 Antes de executar o projeto, certifique-se de ter instalado:
 
-- Java JDK 21 ou superior
+- Java JDK 25 ou superior
 - Maven 3.9 ou superior
 
 ---
