@@ -44,31 +44,34 @@ Antes de executar o projeto, certifique-se de ter instalado:
 ---
 
 ## Estrutura do Projeto
-
+```
 src
-├── main
-│   ├── java
-│   │   └── com.josuesch
-│   │       ├── controller
-│   │       ├── model
-│   │       └── App.java
-│   └── resources
-│       └── fxml
-
+└── main
+    ├── java
+    │   └── com.josuesch
+    │       ├── controller
+    │       ├── model
+    │       └── App.java
+    └── resources
+        └── fxml
+```
 ---
 
 ## Como Executar
 
 ### 1. Clonar o projeto
+```
 git clone <url-do-repositorio>
 cd <nome-do-projeto>
-
+```
 ### 2. Compilar o projeto
+```
 mvn clean install
-
+```
 ### 3. Executar o sistema
+```
 mvn javafx:run
-
+```
 ---
 
 ## Casos de Teste
